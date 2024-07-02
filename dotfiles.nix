@@ -4,7 +4,7 @@
   home.file = {
     
     # Common Dotfiles  
-    ".aliases".source = ./common/dotfiles/.aliases;
+    ".bash_aliases".source = ./common/dotfiles/.aliases;
     ".bash_logger.sh".source = ./common/dotfiles/.bash_logger.sh;
     ".gemrc".source = ./common/dotfiles/.gemrc;
     ".vimrc".source = ./common/dotfiles/.vimrc;
