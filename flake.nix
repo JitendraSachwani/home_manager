@@ -16,7 +16,8 @@
       system = "x86_64-linux";
       homeDirectory = "/home/${username}";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+    in
+    {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
@@ -26,7 +27,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-	extraSpecialArgs = {
+        extraSpecialArgs = {
           username = username;
           homeDirectory = homeDirectory;
         };

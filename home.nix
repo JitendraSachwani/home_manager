@@ -1,21 +1,23 @@
 { config, pkgs, lib, specialArgs, ... }:
 
-let 
+let
   inherit (specialArgs) username homeDirectory;
 in
 {
   imports = [ ./config.nix ] # nixpkgs config
-    
+
+    ++ [ ./custom/modules/default.nix ]
+
     ++ [ ./dotfiles.nix ]
-    
+
     ++ (lib.filesystem.listFilesRecursive ./common/packages)
-    ++ (lib.filesystem.listFilesRecursive ./common/programs)  
+    ++ (lib.filesystem.listFilesRecursive ./common/programs)
     ++ (lib.filesystem.listFilesRecursive ./common/services)
 
     ++ (lib.filesystem.listFilesRecursive ./custom/packages)
     ++ (lib.filesystem.listFilesRecursive ./custom/programs)
     ++ (lib.filesystem.listFilesRecursive ./custom/services)
-    ;
+  ;
 
   home = {
     username = username;
@@ -41,6 +43,11 @@ in
     sessionVariables = { EDITOR = "vi"; };
 
   };
+
+  lib.networking.extraHosts = ''
+    127.0.0.1 server
+    10.0.0.1 server2
+  '';
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
